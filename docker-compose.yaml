@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  scylladb:
+    image: scylladb/scylla
+    restart: always
+    ports:
+      - 9042:9042
+
+  jaegar:
+    image: jaegertracing/all-in-one:1.29
+    ports:
+      - 5775:5775
+      - 6831:6831
+      - 6832:6832
+      - 5778:5778
+      - 16686:16686
+      - 14250:14250 
+      - 14268:14268 
+      - 14269:14269 
+      - 9411:9411
