@@ -1,11 +1,40 @@
 version: "3"
 
 services:
+  users:
+    build:
+      context: ./Users
+      dockerfile: Dockerfile
+    depends_on:
+      - scylladb
+      - consul
+      - jaegar
+      - messages
+    ports:
+      - 8000:8000
+
+  messages:
+    build:
+      context: ./Messages
+      dockerfile: Dockerfile
+    depends_on:
+      - scylladb
+      - consul
+      - jaegar
+    ports:
+      - 8001:8001
+      - 50051:50051
+
   scylladb:
     image: scylladb/scylla
-    restart: always
     ports:
       - 9042:9042
+
+  consul:
+    image: consul:1.11.1
+    restart: always
+    ports:
+      - 8500:8500
 
   jaegar:
     image: jaegertracing/all-in-one:1.29

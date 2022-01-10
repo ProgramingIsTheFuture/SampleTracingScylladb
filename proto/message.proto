@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "grpc/pb";
+package pb;
+
+import "google/protobuf/empty.proto";
+
+message Message {
+	string content = 1;
+	string user = 2;
+}
+
+message Empty {}
+
+service MessageMethods {
+	rpc Send(Message) returns (google.protobuf.Empty) {};
+}
+
